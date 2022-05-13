@@ -30,6 +30,7 @@ sixty4 <- sort(na.omit(data$`1964`), decreasing = TRUE)
 
 Fit gamma to each year. Specifying MLE is unnecessary.
 ```{r}
+fit <- fitdist(data_vec, 'gamma')
 fit0 <- fitdist(sixty, distr = 'gamma', method = 'mle')
 fit1 <- fitdist(sixty1, distr = 'gamma', method = 'mle')
 fit2 <- fitdist(sixty2, distr = 'gamma', method = 'mle')
@@ -59,6 +60,8 @@ k <- seq(.1, 1, .01) # k is shape parameter
 # equation 4
 # L <- prod(data_vec)^(k-1) / exp(N*k) / (sum(data_vec)/k/N)^(N*k) / gamma(k)^N
 
+N <- length(data_vec)
+l <- (k-1)*sum(log(data_vec)) - N*k - N*k*log(sum(data_vec)/k/N) - N*log(gamma(k))
 N <- length(sixty)
 l0 <- (k-1)*sum(log(sixty)) - N*k - N*k*log(sum(sixty)/k/N) - N*log(gamma(k))
 N <- length(sixty1)
@@ -72,6 +75,7 @@ l4 <- (k-1)*sum(log(sixty4)) - N*k - N*k*log(sum(sixty4)/k/N) - N*log(gamma(k))
 
 {
 par(mfrow = c(2,3))
+plot(k,l,type="l",col="green")
 plot(k,l0,type="l",col="green")
 plot(k,l1,type='l',col="green")
 plot(k,l2,type='l',col="green")
