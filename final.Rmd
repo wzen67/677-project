@@ -28,7 +28,7 @@ sixty3 <- sort(na.omit(data$`1963`), decreasing = TRUE)
 sixty4 <- sort(na.omit(data$`1964`), decreasing = TRUE)
 ```
 
-Fit gamma to each year. Specifying MLE is unnecessary.
+Fit gamma to each year. Specifying MLE is unnecessary. Zara found this package.
 ```{r}
 fit <- fitdist(data_vec, 'gamma')
 fit0 <- fitdist(sixty, distr = 'gamma', method = 'mle')
